@@ -1,0 +1,28 @@
+{
+  "name": "testing_natan_liany",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000s\u0000e\u0000r\u0000v\u0000e\u0000r\u0000-\u0000D\u0000B\u0000-\u0000t\u0000e\u0000s\u0000t\u0000i\u0000n\u0000g\u0000-\u0000n\u0000a\u0000t\u0000a\u0000n\u0000\r\u0000 \u0000",
+  "main": "main.js",
+  "scripts": {
+    "start": "node --watch main",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natanliany-svg/server-DB-testing-natan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/natanliany-svg/server-DB-testing-natan/issues"
+  },
+  "homepage": "https://github.com/natanliany-svg/server-DB-testing-natan#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.111.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongodb": "^7.5.0"
+  }
+}
