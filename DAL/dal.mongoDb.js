@@ -12,9 +12,27 @@ export async function getWelfareRecordBySoldierId(soldierId) {
 }
 
 
-// export async function get_all(params) {
-    
-// }
+export async function createSoldiares(data) {
+    try {
+        const res = await collection.insertOne(data)
+        console.log(res);
+        
+        const _id = await res.insertedId
+    } catch (e) {
+        console.error('create is faild');
+        
+    }
+}
+
+export async function createWelfareRecord(record) {
+    try {
+    const res = await collection.insertOne(record)
+    console.log('insert succes - ', record.soldierId)
+    return res.insertedId
+    } catch (e) {
+    console.error(e.message)
+    }
+}
 
 
 

@@ -1,4 +1,4 @@
-import { getWelfareRecordBySoldierId } from "../DAL/dal.mongoDb.js";
+import { createSoldiares, getWelfareRecordBySoldierId } from "../DAL/dal.mongoDb.js";
 import { error } from 'node:console'
 
 
@@ -38,6 +38,23 @@ const newRecord = {
     }
 }
 
+export async function getBenefits(req, res) {
+    try {
+    const soldierId = req.params.soldierId
+    console.log('get benfits runing for soldir:', soldierId)
+
+    const record = await getWelfareRecordBySoldierId(soldierId)
+
+    if (!record) {
+        return res.status(404).json({ error: 'not found' })
+    }
+
+    return res.status(200).json(record)
+    } catch (e) {
+    console.error(e.message)
+    return res.status(500).json({ error: 'server error' })
+    }
+}
 
 
 
