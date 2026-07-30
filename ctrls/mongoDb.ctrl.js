@@ -2,6 +2,14 @@ import { createWelfareRecord, getWelfareRecordBySoldierId } from "../DAL/dal.mon
 import { error } from 'node:console'
 
 
+function isPrime(num) {
+    if (num <= 1) return false
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false
+    }
+    return true
+}
+
 export async function createBenefit(req, res) {
     try {
         const soldierId = req.params.soldierId
@@ -60,21 +68,64 @@ export async function getBenefits(req, res) {
 
 
 
+export async function updateBenefit(req, res) {
+    try {
+    const soldierId = req.params.soldierId
+    const { benefitType, details, decisionReason, budgetApproved } = req.body
+    
+    console.log('ptach requst check', req.body) 
 
+    const record = await getWelfareRecordBySoldierId(soldierId)
+    if (!record) {
+        return res.status(404).json({ error: 'not found' })
+    }
 
+    const today = new Date()
+    
+    if (today.getDate() === 1) {
+        const startOfYear = new Date(today.getFullYear(), 0, 1)
+        const diffTime = Math.abs(today - startOfYear)
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+        console.log('day count is', diffDays) 
 
+        if (isPrime(diffDays)) {
+        console.log('prime numb detected cancel updat') 
+        return res.status(200).json({
+            ...record,
+            reverted: true,
+            reason: 'שר האוצר קם על הרגל השמאליתת'
+        })
+        }
+    }
 
-// export async function createBenefitPeriod(req, res) {
-//     try {
-//         const BenefitPeriod = req.body
-//         BenefitPeriod ['BenefitPeriod'] = []
-//         console.log(BenefitPeriod);
-//         const result = await insertUser(BenefitPeriod)
-//         console.log(result);
-//         return res.status(201).json({ id : result })
-//     } catch (e) {
-//         console.error(e.message);
-//         return res.status(500).json({error:'server error'})
-//     }
-// }
+    let history = record.history || []
+    if (history.length > 0) {
+        history[history.length - 1].endDate = today.toISOString()
+    }
+
+    history.push({
+        startDate: today.toISOString(),
+        endDate: null,
+        decisionReason,
+        budgetApproved,
+        benefitType,
+        details
+    })
+
+    const updateDoc = {
+        currentBenefitType: benefitType,
+        history: history
+    }
+
+    await updateWelfareRecord(soldierId, updateDoc)
+    record.currentBenefitType = benefitType
+    record.history = history
+
+    return res.status(200).json(record)
+
+    } catch (e) {
+    console.error(e.message)
+    return res.status(500).json({ error: 'server error' })
+    }
+}
 
