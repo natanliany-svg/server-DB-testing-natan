@@ -1,4 +1,4 @@
-import { getWelfareRecordBySoldierId } from "../DAL/dal.mongoDb";
+import { getWelfareRecordBySoldierId } from "../DAL/dal.mongoDb.js";
 import { error } from 'node:console'
 
 

@@ -2,8 +2,8 @@
 import { MongoClient } from 'mongodb'
 
 
-const MONGO_DB_URI = process.env(MONGO_DB_URI)
-const client = new MongoClient(MONGO_DB_URI)
+export const MONGO_DB_URI = process.env.MONGO_DB_URI
+export const client = new MongoClient(MONGO_DB_URI)
 
 
 try {

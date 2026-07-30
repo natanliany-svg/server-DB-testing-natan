@@ -1,4 +1,4 @@
-import { collection } from "../Db/mongoDb";
+import { collection } from "../Db/mongoDb.js";
 
 export async function getWelfareRecordBySoldierId(soldierId) {
 
