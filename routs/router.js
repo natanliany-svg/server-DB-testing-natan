@@ -1,11 +1,7 @@
 import express from 'express'
 import { createBenefit, getBenefits, updateBenefit } from '../ctrls/mongoDb.ctrl.js'
-import { addBudget, getBudgetStatus, getTransactions } from '../ctrls/supabase.ctrl.js'
+import { addBudget, createSpendTrans, getBudgetStatus, getTransactions } from '../ctrls/supabase.ctrl.js'
 import { getBudgetById, getBudgetsByUnit, getTransactionsByBudgetId } from '../DAL/dal.supabase.js'
-
-
-
-
 
 
 
@@ -22,10 +18,6 @@ router.post('/budget' ,addBudget )
 
 router.get('/budget', getBudgetStatus)
 
-// router.get('/budget/:id/transactions'  )
+router.get('/budget/:id/transactions' , getTransactions )
 
-// router.post('budget/:id/spend' )
-
-
-
-
+router.post('/budget/:id/spend', createSpendTrans )
