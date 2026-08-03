@@ -92,3 +92,14 @@ export async function getBudgetById(budgetId) {
     console.error(e.message)
     }
 }
+
+export async function getAllBudgets() {
+    try {
+        const {data, error} = await SBClient.from('budgets').select('*')
+        if (error) return null
+        return data
+    } catch (e) {
+        console.error(e.message);
+        
+    }
+}

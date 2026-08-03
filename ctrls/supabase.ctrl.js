@@ -1,7 +1,7 @@
 //בסיעתא דשמייא 
 
 import { getWelfareRecordBySoldierId } from "../DAL/dal.mongoDb.js"
-import { createBudget, createTransaction, getBudgetById, getBudgetsByUnit, getTransactionsByBudgetId } from "../DAL/dal.supabase.js"
+import { createBudget, createTransaction, getAllBudgets, getBudgetById, getBudgetsByUnit, getTransactionsByBudgetId } from "../DAL/dal.supabase.js"
 
 
 export async function addBudget(req, res) {
@@ -42,6 +42,34 @@ export async function getTransactions(req, res) {
     } catch (e) {
     console.error(e.message)
     return res.status(500).json({ error: 'server error' })
+    }
+}
+
+
+
+export async function getBudgetStatus(req,res) {
+    try {
+        const unit = req.query.unit
+        let budgets = unit ? await getBudgetsByUnit(unit) : await getAllBudgets()
+        if (!budgets) return res.status(200).json([])
+            const result = []
+        for (let budget of budgets) {
+            const transs = await getTransactionsByBudgetId(budget.id) || []
+            let spnt = 0
+
+            for (let t of transs) {
+                spnt += t.amount
+            }
+            result.push({
+                ...budget,
+                spentAmount: spnt,
+                remainingAmount: budget.allocatedAmount -spnt
+            })
+        }
+        return res.status(200).json(result)
+    } catch (e) {
+        console.error(e.message);
+        return res.status(500).json({error:'serverr error'})
     }
 }
 
