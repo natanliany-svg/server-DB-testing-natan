@@ -12,17 +12,17 @@ export async function getWelfareRecordBySoldierId(soldierId) {
 }
 
 
-export async function createSoldiares(data) {
-    try {
-        const res = await collection.insertOne(data)
-        console.log(res);
+// export async function createSoldiares(data) {
+//     try {
+//         const res = await collection.insertOne(data)
+//         console.log(res);
         
-        const _id = await res.insertedId
-    } catch (e) {
-        console.error('create is faild');
+//         const _id = await res.insertedId
+//     } catch (e) {
+//         console.error('create is faild');
         
-    }
-}
+//     }
+// }
 
 export async function createWelfareRecord(record) {
     try {
@@ -37,7 +37,14 @@ export async function createWelfareRecord(record) {
 
 
 
-
+export async function updateWelfareRecord(soldiers, updateDoc) {
+    try {
+        await collection.updateOne({soldierId: Number(soldierId)}, {$set:updateDoc})
+    } catch (e) {
+        console.error(e.message);
+        
+    }
+}
 
 
 

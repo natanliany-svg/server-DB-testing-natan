@@ -1,7 +1,7 @@
 //בסיעתא דשמייא 
 
 import { getWelfareRecordBySoldierId } from "../DAL/dal.mongoDb.js"
-import { createTransaction, getBudgetById, getBudgetsByUnit, getTransactionsByBudgetId } from "../DAL/dal.supabase.js"
+import { createBudget, createTransaction, getBudgetById, getBudgetsByUnit, getTransactionsByBudgetId } from "../DAL/dal.supabase.js"
 
 
 export async function addBudget(req, res) {

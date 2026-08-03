@@ -15,17 +15,17 @@ router.post('/soldiers/:soldierID/benefits' , createBenefit)
 
 router.get('/soldiers/:soldierID/benefits' , getBenefits ,)
 
-router.patch('/soldiers/:soldierID/benefits' , getTransactions ,updateBenefit)
+router.patch('/soldiers/:soldierID/benefits' ,updateBenefit)
 
 
 router.post('/budget' ,addBudget )
 
-router.get('/budget' , getBudgetsByUnit , getBudgetById)
+// router.get('/budget' )
 
-router.get('/budget/:id/transactions' , getTransactionsByBudgetId ,)
+// router.get('/budget/:id/transactions'  )
 
-router.post('budget/:id/spend' , updateBenefit)
+// router.post('budget/:id/spend' )
 
 
-router.get('/soldiers/:soldierID/benefits' , getTransactions )
+
 

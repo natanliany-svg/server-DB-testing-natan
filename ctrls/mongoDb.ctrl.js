@@ -1,4 +1,4 @@
-import { createWelfareRecord, getWelfareRecordBySoldierId } from "../DAL/dal.mongoDb.js";
+import { createWelfareRecord, getWelfareRecordBySoldierId, updateWelfareRecord } from "../DAL/dal.mongoDb.js";
 import { error } from 'node:console'
 
 
